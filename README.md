@@ -6,8 +6,16 @@
 `./bin/emaily`
 
 ### Using Docker image
+`make build && make run`
 
-
+### Using a different base docker image
+```
+FROM ubuntu:latest as dev
+WORKDIR /usr/src/app
+COPY bin/emaily /usr/local/bin/emaily
+EXPOSE 8081
+CMD /usr/local/bin/emaily
+```
 
 ## Request example
 To send a email make a HTTP request like below
