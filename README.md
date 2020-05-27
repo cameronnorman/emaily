@@ -3,12 +3,14 @@
 ## Getting started
 
 ### Using binary
-./bin/emaily
+`./bin/emaily`
 
 ### Using Docker image
 
 
+
 ## Request example
+To send a email make a HTTP request like below
 
 `POST http://localhost:8081`
 
