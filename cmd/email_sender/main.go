@@ -1,8 +1,11 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
+	"html/template"
 	"net/smtp"
+	"os"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -23,14 +26,17 @@ type emailConfig struct {
 }
 
 type sendEmailRequest struct {
-	Details emailDetails `json:"details"`
-	Config  emailConfig  `json:"config"`
+	Details      emailDetails           `json:"details"`
+	Config       emailConfig            `json:"config"`
+	TemplateName string                 `json:"template_name"`
+	Data         map[string]interface{} `json:"data"`
 }
 
 func main() {
 	e := echo.New()
 	e.Use(middleware.CORS())
-	e.POST("/", handleSendEmailRequest)
+	e.POST("/send", handleSendEmailRequest)
+	e.POST("/send_with_template", handleSendTemplateRequest)
 	e.Logger.Fatal(e.Start(":8081"))
 }
 
@@ -39,6 +45,44 @@ func handleSendEmailRequest(c echo.Context) error {
 	if err := c.Bind(&r); err != nil {
 		return err
 	}
+
+	err := sendMail(r)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func handleSendTemplateRequest(c echo.Context) error {
+	templatesPath := "templates/"
+	if os.Getenv("TEMPLATES_PATH") != "" {
+		templatesPath = os.Getenv("TEMPLATES_PATH")
+	}
+
+	r := sendEmailRequest{}
+	if err := c.Bind(&r); err != nil {
+		return err
+	}
+
+	t, err := template.ParseFiles(templatesPath + r.TemplateName + ".html")
+	if err != nil {
+		c.JSON(422, err.Error())
+		return err
+	}
+
+	var tpl bytes.Buffer
+	if err := t.Execute(&tpl, r.Data); err != nil {
+		c.JSON(422, err.Error())
+		return err
+	}
+	r.Details.Body = tpl.String()
+	err = sendMail(r)
+
+	return nil
+}
+
+func sendMail(r sendEmailRequest) error {
 	mime := "MIME-version: 1.0;\nContent-Type: text/html; charset=\"UTF-8\";\n\n"
 	fromHeader := "From: " + r.Details.From + "!\n"
 	toHeader := "To: " + r.Details.To + "!\n"

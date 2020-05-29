@@ -1,0 +1,45 @@
+<mjml>
+  <mj-body>
+    <mj-section>
+      <mj-column>
+        <mj-image width="150px" src="{{.logo}}" align="center"></mj-image>
+        <mj-text font-size="20px" color="#000" font-family="helvetica" align="center">{{.invoice_number}}</mj-text>
+        <mj-text font-size="15px" color="#000" font-family="helvetica" align="center">{{.company_name}}</mj-text>
+        <mj-text font-size="10px" color="#000" font-family="helvetica" align="center">Email: {{.contact_email}}</mj-text>
+        <mj-text font-size="10px" color="#000" font-family="helvetica" align="center">Contact Number: {{.contact_number}}</mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section>
+      <mj-column>
+        <mj-divider border-width="1px" border-style="dashed" border-color="lightgrey" />
+        <mj-table>
+          <tr style="border-bottom:1px solid #ecedee;text-align:left;padding:15px 0;">
+            <th style="padding: 0 15px 0 0;">Name</th>
+            <th style="padding: 0 15px;">Quantity</th>
+            <th style="padding: 0 0 0 15px;">Price</th>
+            <th style="padding: 0 0 0 15px;">Total</th>
+          </tr>
+          <tr>
+            <td style="padding: 0 15px 0 0;">{{.name}}</td>
+            <td style="padding: 0 15px;">{{.quantity}}</td>
+            <td style="padding: 0 0 0 15px;">{{.price}}</td>
+            <td style="padding: 0 0 0 15px;">{{.total}}</td>
+          </tr>
+        </mj-table>
+        <mj-text font-size="15px" color="#000" font-family="helvetica" font-weight="bold" align="right">Total: {{.total}}</mj-text>
+        <mj-divider border-width="1px" border-style="dashed" border-color="lightgrey" />
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-text font-size="15px" color="#000" font-family="helvetica">Payment Details</mj-text>
+        <mj-text font-size="12px" color="#000" font-family="helvetica">{{.payment_details.bank}}</mj-text>
+        <mj-text font-size="12px" color="#000" font-family="helvetica">Account number: {{.payment_details.account_number}}</mj-text>
+        <mj-text font-size="12px" color="#000" font-family="helvetica">Branch code: {{.payment_details.branch_code}}</mj-text>
+        <mj-text font-size="12px" color="#000" font-family="helvetica">Ref: {{.payment_details.reference}}</mj-text>
+        <mj-text font-size="12px" color="#000" font-family="helvetica">{{.payment_details.message}}</mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>
