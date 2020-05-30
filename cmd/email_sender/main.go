@@ -9,6 +9,7 @@ import (
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
+	"github.com/labstack/gommon/log"
 )
 
 type emailDetails struct {
@@ -35,6 +36,8 @@ type sendEmailRequest struct {
 func main() {
 	e := echo.New()
 	e.Use(middleware.CORS())
+	e.Use(middleware.Logger())
+
 	e.POST("/send", handleSendEmailRequest)
 	e.POST("/send_with_template", handleSendTemplateRequest)
 	e.Logger.Fatal(e.Start(":8081"))
@@ -46,10 +49,7 @@ func handleSendEmailRequest(c echo.Context) error {
 		return err
 	}
 
-	err := sendMail(r)
-	if err != nil {
-		return err
-	}
+	go sendMail(r)
 
 	return nil
 }
@@ -77,7 +77,7 @@ func handleSendTemplateRequest(c echo.Context) error {
 		return err
 	}
 	r.Details.Body = tpl.String()
-	err = sendMail(r)
+	go sendMail(r)
 
 	return nil
 }
@@ -93,9 +93,11 @@ func sendMail(r sendEmailRequest) error {
 	err := smtp.SendMail(addr, auth, r.Details.From, []string{r.Details.To}, msg)
 
 	if err != nil {
-		fmt.Println(err.Error())
-		return err
+		log.Error("Email failed to send to:" + r.Details.To + " - " + err.Error())
+		return nil
 	}
+
+	log.Info("Email successfully sent to:" + r.Details.To)
 
 	return nil
 }
