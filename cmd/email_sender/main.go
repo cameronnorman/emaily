@@ -38,9 +38,15 @@ func main() {
 	e.Use(middleware.CORS())
 	e.Use(middleware.Logger())
 
+	e.GET("/check", handleHealthCheckRequest)
 	e.POST("/send", handleSendEmailRequest)
 	e.POST("/send_with_template", handleSendTemplateRequest)
 	e.Logger.Fatal(e.Start(":8081"))
+}
+
+func handleHealthCheckRequest(c echo.Context) error {
+	c.JSON(200, "OK")
+	return nil
 }
 
 func handleSendEmailRequest(c echo.Context) error {
