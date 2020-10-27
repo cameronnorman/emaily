@@ -34,9 +34,17 @@ type sendEmailRequest struct {
 }
 
 func main() {
+
 	e := echo.New()
 	e.Use(middleware.CORS())
 	e.Use(middleware.Logger())
+	validator := func(auth string, c echo.Context) (bool, error) {
+		return auth == os.Getenv("AUTH"), nil
+	}
+	e.Use(middleware.KeyAuthWithConfig(middleware.KeyAuthConfig{
+		KeyLookup: "query:auth",
+		Validator: validator,
+	}))
 
 	e.GET("/check", handleHealthCheckRequest)
 	e.POST("/send", handleSendEmailRequest)

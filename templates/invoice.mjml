@@ -3,13 +3,18 @@
     <mj-section>
       <mj-column>
         <mj-image width="150px" src="{{.logo}}" align="center"></mj-image>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+       <mj-column>
         <mj-text font-size="20px" color="#000" font-family="helvetica" align="center">{{.invoice_number}}</mj-text>
         <mj-text font-size="15px" color="#000" font-family="helvetica" align="center">{{.company_name}}</mj-text>
         <mj-text font-size="10px" color="#000" font-family="helvetica" align="center">Email: {{.contact_email}}</mj-text>
         <mj-text font-size="10px" color="#000" font-family="helvetica" align="center">Contact Number: {{.contact_number}}</mj-text>
+        <mj-text font-size="10px" color="#000" font-family="helvetica" align="center">Customer Name: {{.customer_name}}</mj-text>
+        <mj-text font-size="10px" color="#000" font-family="helvetica" align="center">Customer Contact Number: {{.customer_contact_number}}</mj-text>
       </mj-column>
     </mj-section>
-
     <mj-section>
       <mj-column>
         <mj-divider border-width="1px" border-style="dashed" border-color="lightgrey" />
@@ -29,6 +34,10 @@
         </mj-table>
         <mj-text font-size="15px" color="#000" font-family="helvetica" font-weight="bold" align="right">Total: {{.total}}</mj-text>
         <mj-divider border-width="1px" border-style="dashed" border-color="lightgrey" />
+        <mj-text font-size="15px" color="#000" font-family="helvetica">Customer Details</mj-text>
+        <mj-text font-size="12px" color="#000" font-family="helvetica">Name: {{.customer_details.name}}</mj-text>
+        <mj-text font-size="12px" color="#000" font-family="helvetica">Email: {{.customer_details.email}}</mj-text>
+        <mj-text font-size="12px" color="#000" font-family="helvetica">Contact Number: {{.customer_details.contact_number}}</mj-text>
       </mj-column>
     </mj-section>
     <mj-section>
@@ -43,3 +52,4 @@
     </mj-section>
   </mj-body>
 </mjml>
+
