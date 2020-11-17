@@ -11,8 +11,6 @@
         <mj-text font-size="15px" color="#000" font-family="helvetica" align="center">{{.company_name}}</mj-text>
         <mj-text font-size="10px" color="#000" font-family="helvetica" align="center">Email: {{.contact_email}}</mj-text>
         <mj-text font-size="10px" color="#000" font-family="helvetica" align="center">Contact Number: {{.contact_number}}</mj-text>
-        <mj-text font-size="10px" color="#000" font-family="helvetica" align="center">Customer Name: {{.customer_name}}</mj-text>
-        <mj-text font-size="10px" color="#000" font-family="helvetica" align="center">Customer Contact Number: {{.customer_contact_number}}</mj-text>
       </mj-column>
     </mj-section>
     <mj-section>

@@ -243,12 +243,14 @@
                           <th style="padding: 0 0 0 15px;">Price</th>
                           <th style="padding: 0 0 0 15px;">Total</th>
                         </tr>
-                        <tr>
-                          <td style="padding: 0 15px 0 0;">{{.name}}</td>
-                          <td style="padding: 0 15px;">{{.quantity}}</td>
-                          <td style="padding: 0 0 0 15px;">{{.price}}</td>
-                          <td style="padding: 0 0 0 15px;">{{.total}}</td>
-                        </tr>
+                        {{range .invoice_items}}
+                          <tr>
+                            <td style="padding: 0 15px 0 0;">{{.name}}</td>
+                            <td style="padding: 0 15px;">{{.quantity}}</td>
+                            <td style="padding: 0 0 0 15px;">{{.price}}</td>
+                            <td style="padding: 0 0 0 15px;">{{.total}}</td>
+                          </tr>
+                        {{end}}
                       </table>
                     </td>
                   </tr>
