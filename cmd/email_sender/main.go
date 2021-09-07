@@ -2,13 +2,14 @@ package main
 
 import (
 	"bytes"
-	"emailSender/pkg/service"
 	"fmt"
 	"html/template"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
+
+	"github.com/cameronnorman/emaily/pkg/service"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
