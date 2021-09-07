@@ -3,8 +3,6 @@ package service
 import (
 	"fmt"
 	"net/smtp"
-
-	"github.com/labstack/gommon/log"
 )
 
 type details struct {
@@ -39,11 +37,8 @@ func SendMail(r Request) error {
 	err := smtp.SendMail(addr, auth, r.Details.From, []string{r.Details.To}, msg)
 
 	if err != nil {
-		log.Error("Email failed to send to:" + r.Details.To + " - " + err.Error())
 		return nil
 	}
-
-	log.Info("Email successfully sent to:" + r.Details.To)
 
 	return nil
 }
