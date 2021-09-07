@@ -1,4 +1,5 @@
 FROM alpine:3.9.6 as dev
+RUN apk add curl
 WORKDIR /usr/src/app
 COPY bin/emaily /usr/local/bin/emaily
 COPY templates /usr/local/bin/templates
