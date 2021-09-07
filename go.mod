@@ -1,4 +1,4 @@
-module emailSender
+module github.com/cameronnorman/emaily
 
 go 1.13
 
